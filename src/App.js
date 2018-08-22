@@ -3,6 +3,8 @@ import BookIcon from '@material-ui/icons/Book';
 
 import './App.css';
 import AddRecordDialog from './AddRecordDialog';
+import DeleteRecordDialog from './DeleteRecordDialog';
+import SearchRecordDialog from './SearchRecordDialog';
 import NavBar from './NavBar';
 
 class App extends React.Component {
@@ -80,6 +82,10 @@ class App extends React.Component {
 					onChange={this.handleChange.bind(this)}
 					handleCancel={this.handleCloseAddDialog.bind(this, false)}
 					handleAdd={this.handleCloseAddDialog.bind(this, true)}
+				/>
+				<DeleteRecordDialog
+				/>
+				<SearchRecordDialog
 				/>
       </div>
     );
