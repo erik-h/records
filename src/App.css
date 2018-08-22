@@ -1,5 +1,10 @@
+body, html, #root {
+	height: 100%;
+}
+
 .App {
   text-align: center;
+  height: 90%;
 }
 
 .App-logo {
@@ -25,4 +30,21 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.nav-bar-button {
+	flex-grow: 1;
+}
+
+.book-logo {
+	font-size: 17em !important;
+}
+
+#project-info {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	overflow: hidden;
 }
