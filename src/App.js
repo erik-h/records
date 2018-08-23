@@ -93,7 +93,6 @@ class App extends React.Component {
 	}
 
 	allPropsMatch(testSubject, master) {
-		// Search through each of the properties that must match
 		for (let prop in master) {
 				if (!testSubject.hasOwnProperty(prop) || testSubject[prop] !== master[prop]) {
 					return false
@@ -102,12 +101,25 @@ class App extends React.Component {
 		return true;
 	}
 
-	findRecord(searchProps) {
-		let foundRecord = mockDB.find((element) => {
+	fuzzyPropsMatch(testSubject, master) {
+		for (let prop in master) {
+			if (testSubject.hasOwnProperty(prop) || testSubject[prop].contains(master[prop])) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	findExactRecords(searchProps) {
+		return mockDB.filter((element) => {
 			return this.allPropsMatch(element, searchProps);
 		});
-		// TODO: deal with case where foundRecord is undefined
-		return foundRecord;
+	}
+
+	findFuzzyRecords(searchProps) {
+		return mockDB.filter((element) => {
+			return this.fuzzyPropsMatch(element, searchProps);
+		});
 	}
 
 	handleCloseAddDialog(shouldAdd) {
@@ -122,10 +134,11 @@ class App extends React.Component {
 				phoneNumber: newPhoneNumber,
 			});
 			// DEBUG: testing finding a record we just added
-			// let foundRecord = this.findRecord({
+			// let foundRecords = this.findFuzzyRecords({
+			// let foundRecords = this.findExactRecords({
 			// 	name: newName,
 			// });
-			// console.log(`Found the record we just added!: ${JSON.stringify(foundRecord)}`);
+			// console.log(`Fuzzy found the record we just added!: ${JSON.stringify(foundRecords)}`);
 			// DEBUG: testing deleting a record
 			// this.deleteRecord({
 			// 	id: 1000000000,
@@ -134,7 +147,6 @@ class App extends React.Component {
 			console.log(`newRecord phone number is: ${JSON.stringify(this.state.phoneNumber)}`);
 		}
 		else if (shouldAdd) {
-			// TODO: display an error Snackbar
 			console.error('New record is invalid! It will not be added');
 			this.setState({
 				showErrorSnackbar: true,
