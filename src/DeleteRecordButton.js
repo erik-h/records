@@ -10,9 +10,9 @@ class DeleteRecordButton extends React.Component {
 	}
 	render() {
 		return (
-			<Button onClick={this.handleClick.bind(this)} style={{fontSize: 15}} variant="contained" color="secondary">
+			<Button onClick={this.handleClick.bind(this)} style={{fontSize: "1em"}} variant="contained" color="secondary">
 				Delete
-				<DeleteIcon style={{fontSize: 20}}/>
+				<DeleteIcon style={{fontSize: "1.5em"}}/>
 			</Button>
 		);
 	}
