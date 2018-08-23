@@ -6,6 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 import RecordsTable from './RecordsTable';
 
@@ -45,7 +46,7 @@ class SearchRecordDialog extends React.Component {
 							}
 							{
 								!this.props.foundRecords &&
-								<h2>No records found</h2>
+								<Typography style={{paddingTop: "5%"}} variant="display1">No records found</Typography>
 							}
 						</DialogContent>
 						<DialogActions>
