@@ -9,6 +9,14 @@ import ErrorSnackbar from './ErrorSnackbar';
 import SearchRecordDialog from './SearchRecordDialog';
 import NavBar from './NavBar';
 
+let mockDB = window.mockDB = [
+	{
+		id: 1000000000,
+		name: "John Doe",
+		phoneNumber: "7805551234",
+	}
+];
+
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -56,6 +64,38 @@ class App extends React.Component {
 		});
 	}
 
+	findNextID() {
+		return mockDB.reduce((previous, current) => {
+			return previous === undefined || current.id > previous ? current.id : previous;
+		}, undefined) + 1;
+	}
+
+	addRecord(newRecord) {
+		// TODO: do a POST request to the real API to add our new record
+		mockDB.push({
+			id: this.findNextID(),
+			...newRecord
+		});
+		console.log(`mockDB is now: ${JSON.stringify(mockDB)}`);
+	}
+
+	deleteRecord(deleteRecord) {
+		// Find the index in our mock DB that matches the given ID to delete
+		let recordIndex = mockDB.findIndex((element, index, array) => {
+			// return element.id === deleteId;
+			// Search through each of the properties that must match
+			for (let prop in deleteRecord) {
+				if (!element.hasOwnProperty(prop) || element[prop] !== deleteRecord[prop]) {
+					return false
+				}
+			}
+			return true;
+		});
+		// Delete the record from the mock DB
+		let deletedRecord = mockDB.splice(recordIndex, 1);
+		console.log(`Deleted record: ${JSON.stringify(deletedRecord)}`);
+	}
+
 	handleCloseAddDialog(shouldAdd) {
 		console.log(`shouldAdd is: ${shouldAdd}`);
 		const newName = this.state.name;
@@ -63,6 +103,14 @@ class App extends React.Component {
 
 		if (shouldAdd && this.validName(newName) && this.validPhoneNumber(newPhoneNumber)) {
 			console.log('Doing all the important adding stuff...');
+			this.addRecord({
+				name: newName,
+				phoneNumber: newPhoneNumber,
+			});
+			// DEBUG: testing if deleting a record works
+			// this.deleteRecord({
+			// 	id: 1000000000,
+			// });
 			console.log(`newRecord name is: ${JSON.stringify(this.state.name)}`);
 			console.log(`newRecord phone number is: ${JSON.stringify(this.state.phoneNumber)}`);
 		}
