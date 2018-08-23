@@ -232,8 +232,6 @@ class App extends React.Component {
 				<div id="project-info">
 					<BookIcon className="book-logo" color="primary" />
 					<p><b>TODO</b>, this will contain some info about the project.</p>
-					<p>Show add is: {this.state.showAdd ? "true" : "false"}</p>
-					<p>Show error snackbar is: {this.state.showErrorSnackbar ? "true" : "false"}</p>
 				</div>
 				<AddRecordDialog
 					open={this.state.showAdd}
