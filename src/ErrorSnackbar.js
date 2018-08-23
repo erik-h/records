@@ -5,9 +5,18 @@ import ErrorIcon from '@material-ui/icons/Error';
 import CloseIcon from '@material-ui/icons/Close';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import { withStyles } from '@material-ui/core/styles';
+import red from '@material-ui/core/colors/red';
+
+const styles = {
+	root: {
+		backgroundColor: '#f50057',
+	}
+};
 
 class ErrorSnackbar extends React.Component {
 	render() {
+		const { classes } = this.props;
 		return (
 				<Snackbar
 					open={this.props.open}
@@ -15,6 +24,9 @@ class ErrorSnackbar extends React.Component {
 					autoHideDuration={this.props.autoHideDuration}
 				>
 					<SnackbarContent
+						classes={{
+							root: classes.root
+						}}
 						className="error"
 						aria-describedby="client-snackbar"
 						message={
@@ -39,4 +51,4 @@ class ErrorSnackbar extends React.Component {
 	}
 }
 
-export default ErrorSnackbar;
+export default withStyles(styles)(ErrorSnackbar);
