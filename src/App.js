@@ -42,10 +42,12 @@ class App extends React.Component {
 	}
 
 	validName(name) {
+		// We'll say a name is valid as long as it isn't empty
 		return name;
 	}
 
 	validPhoneNumber(phoneNumber) {
+		// TODO: maybe apply more checks?
 		return phoneNumber && /^\d+$/.test(phoneNumber);
 	}
 
