@@ -12,7 +12,6 @@ class RecordsTable extends React.Component {
 			<Table>
 				<TableHead>
 					<TableRow>
-						{this.props.recordModifier && <TableCell></TableCell>}
 						<TableCell>Name</TableCell>
 						<TableCell>Phone Number</TableCell>
 					</TableRow>
@@ -22,10 +21,9 @@ class RecordsTable extends React.Component {
 						this.props.records.map((record) => {
 							return (
 								<TableRow key={record.id}>
-									{
-										this.props.recordModifier &&
-										<TableCell>
+									<TableCell>
 										{
+											this.props.recordModifier &&
 											React.cloneElement(
 												this.props.recordModifier,
 												{
@@ -33,9 +31,8 @@ class RecordsTable extends React.Component {
 												}
 											)
 										}
-										</TableCell>
-									}
-									<TableCell>{record.name}</TableCell>
+										{record.name}
+									</TableCell>
 									<TableCell>{record.phoneNumber}</TableCell>
 								</TableRow>
 							);
