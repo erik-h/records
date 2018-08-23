@@ -15,32 +15,34 @@ class AddRecordDialog extends React.Component {
 					onClose={this.props.onClose}
 				>
 					<DialogTitle>Test Dialog</DialogTitle>
-					<DialogContent>
-						<DialogContentText>
-							Test dialog content is right here!
-						</DialogContentText>
-						<TextField
-							onChange={this.props.onChange}
-							autoFocus
-							name="name"
-							label="Name"
-							fullWidth
-						/>
-						<TextField
-							onChange={this.props.onChange}
-							name="phoneNumber"
-							label="Phone Number"
-							fullWidth
-						/>
-					</DialogContent>
-					<DialogActions>
-						<Button onClick={this.props.handleCancel}>
-							Cancel
-						</Button>
-						<Button onClick={this.props.handleAdd}>
-							Add
-						</Button>
-					</DialogActions>
+					<form onSubmit={(e) => e.preventDefault()}>
+						<DialogContent>
+							<DialogContentText>
+								Test dialog content is right here!
+							</DialogContentText>
+								<TextField
+									onChange={this.props.onChange}
+									autoFocus
+									name="name"
+									label="Name"
+									fullWidth
+								/>
+								<TextField
+									onChange={this.props.onChange}
+									name="phoneNumber"
+									label="Phone Number"
+									fullWidth
+								/>
+						</DialogContent>
+						<DialogActions>
+							<Button type="button" onClick={this.props.handleCancel}>
+								Cancel
+							</Button>
+							<Button type="submit" onClick={this.props.handleAdd}>
+								Add
+							</Button>
+						</DialogActions>
+					</form>
 				</Dialog>
 		);
 	}
