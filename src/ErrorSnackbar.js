@@ -19,7 +19,7 @@ class ErrorSnackbar extends React.Component {
 						aria-describedby="client-snackbar"
 						message={
 							<span id="client-snackbar" style={{display: 'flex', alignItems: 'center'}}>
-								<ErrorIcon />
+								<ErrorIcon /> &nbsp;
 								{this.props.children}
 							</span>
 						}
