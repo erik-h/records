@@ -6,7 +6,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { withStyles } from '@material-ui/core/styles';
-import red from '@material-ui/core/colors/red';
 
 const styles = {
 	root: {
