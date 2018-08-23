@@ -12,9 +12,9 @@ class RecordsTable extends React.Component {
 			<Table>
 				<TableHead>
 					<TableRow>
+						{this.props.recordModifier && <TableCell></TableCell>}
 						<TableCell>Name</TableCell>
 						<TableCell>Phone Number</TableCell>
-						{this.props.recordModifier && <TableCell></TableCell>}
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -22,8 +22,6 @@ class RecordsTable extends React.Component {
 						this.props.records.map((record) => {
 							return (
 								<TableRow key={record.id}>
-									<TableCell>{record.name}</TableCell>
-									<TableCell>{record.phoneNumber}</TableCell>
 									{
 										this.props.recordModifier &&
 										<TableCell>
@@ -37,6 +35,8 @@ class RecordsTable extends React.Component {
 										}
 										</TableCell>
 									}
+									<TableCell>{record.name}</TableCell>
+									<TableCell>{record.phoneNumber}</TableCell>
 								</TableRow>
 							);
 						})
