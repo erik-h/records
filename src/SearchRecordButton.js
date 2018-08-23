@@ -6,12 +6,13 @@ import './App.css';
 
 class SearchRecordButton extends React.Component {
 	handleClick() {
-		alert('Searching!');
+		// alert('Searching!');
+		this.props.handler({showSearch: true});
 	}
 
 	render() {
 		return (
-			<NavButton onClick={this.handleClick}>
+			<NavButton onClick={this.handleClick.bind(this)}>
 				<SearchIcon />
 			</NavButton>
 		);

@@ -1,11 +1,15 @@
 import React from 'react';
 
+import DeleteRecordButton from './DeleteRecordButton';
+import SearchRecordDialog from './SearchRecordDialog';
+
 class DeleteRecordDialog extends React.Component {
 	render() {
 		return (
-			<div>
-				<p>TODO: implement DeleteRecordDialog</p>
-			</div>
+			<SearchRecordDialog
+					{...this.props}
+					recordModifier={<DeleteRecordButton onClick={this.props.onDelete}/>}
+			/>
 		);
 	}
 }

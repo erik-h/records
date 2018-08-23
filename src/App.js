@@ -31,6 +31,9 @@ class App extends React.Component {
 
 			name: "",
 			phoneNumber: "",
+
+			foundRecords: true,
+			displayedRecords: [],
 		};
 	}
 
@@ -67,7 +70,7 @@ class App extends React.Component {
 	findNextID() {
 		return mockDB.reduce((previous, current) => {
 			return previous === undefined || current.id > previous ? current.id : previous;
-		}, undefined) + 1;
+		}, 999999999) + 1;
 	}
 
 	addRecord(newRecord) {
@@ -103,7 +106,13 @@ class App extends React.Component {
 
 	fuzzyPropsMatch(testSubject, master) {
 		for (let prop in master) {
-			if (testSubject.hasOwnProperty(prop) || testSubject[prop].contains(master[prop])) {
+			if (!master[prop] || !testSubject.hasOwnProperty(prop)) {
+				// Skip comparing against empty props, as they will always match with
+				// any string; also skip props that our test subject does not have
+				continue;
+			}
+			console.log(`Checking if ${testSubject[prop]} includes ${master[prop]}`)
+			if (testSubject[prop].toLowerCase().includes(master[prop].toLowerCase())) {
 				return true;
 			}
 		}
@@ -162,6 +171,57 @@ class App extends React.Component {
 		});
 	}
 
+	handleCloseSearchDialog() {
+		this.setState({
+			showSearch: false,
+			name: "",
+			phoneNumber: "",
+			foundRecords: true,
+			displayedRecords: [],
+		});
+	}
+
+	handleCloseDeleteDialog() {
+		this.setState({
+			showDelete: false,
+			name: "",
+			phoneNumber: "",
+			foundRecords: true,
+			displayedRecords: [],
+		});
+	}
+
+	handleSearchRecords() {
+		const { name, phoneNumber } = this.state;
+		console.log(`Going to search for: ${name} and ${phoneNumber}`);
+		let foundRecords = this.findFuzzyRecords({
+			name: name,
+			phoneNumber: phoneNumber,
+		});
+		console.log(`Here is what we found: ${JSON.stringify(foundRecords)}`);
+		if (foundRecords.length === 0) {
+			console.log('Did not find any records!');
+			this.setState({
+				foundRecords: false,
+				displayedRecords: [],
+			});
+		}
+		else {
+			this.setState({
+				foundRecords: true,
+				displayedRecords: foundRecords,
+			});
+		}
+	}
+
+	handleDelete(recordId) {
+		console.log(`Handling delete, recordId is: ${recordId}`);
+		this.deleteRecord({
+			id: recordId,
+		});
+		this.handleSearchRecords();
+	}
+
   render() {
     return (
       <div className="App">
@@ -181,8 +241,21 @@ class App extends React.Component {
 					handleAdd={this.handleCloseAddDialog.bind(this, true)}
 				/>
 				<DeleteRecordDialog
+					open={this.state.showDelete}
+					onChange={this.handleChange.bind(this)}
+					onDelete={this.handleDelete.bind(this)}
+					handleClose={this.handleCloseDeleteDialog.bind(this)}
+					handleSearch={this.handleSearchRecords.bind(this)}
+					records={this.state.displayedRecords}
+					foundRecords={this.state.foundRecords}
 				/>
 				<SearchRecordDialog
+					open={this.state.showSearch}
+					onChange={this.handleChange.bind(this)}
+					handleClose={this.handleCloseSearchDialog.bind(this)}
+					handleSearch={this.handleSearchRecords.bind(this)}
+					records={this.state.displayedRecords}
+					foundRecords={this.state.foundRecords}
 				/>
 				<ErrorSnackbar
 					open={this.state.showErrorSnackbar}
