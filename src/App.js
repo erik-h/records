@@ -101,6 +101,15 @@ class App extends React.Component {
 		}
 		return true;
 	}
+
+	findRecord(searchProps) {
+		let foundRecord = mockDB.find((element) => {
+			return this.allPropsMatch(element, searchProps);
+		});
+		// TODO: deal with case where foundRecord is undefined
+		return foundRecord;
+	}
+
 	handleCloseAddDialog(shouldAdd) {
 		console.log(`shouldAdd is: ${shouldAdd}`);
 		const newName = this.state.name;
@@ -112,6 +121,11 @@ class App extends React.Component {
 				name: newName,
 				phoneNumber: newPhoneNumber,
 			});
+			// DEBUG: testing finding a record we just added
+			// let foundRecord = this.findRecord({
+			// 	name: newName,
+			// });
+			// console.log(`Found the record we just added!: ${JSON.stringify(foundRecord)}`);
 			// DEBUG: testing deleting a record
 			// this.deleteRecord({
 			// 	id: 1000000000,
