@@ -11,6 +11,7 @@ class AddRecordDialog extends React.Component {
 	render() {
 		return (
 				<Dialog
+					scroll="body"
 					open={this.props.open}
 					onClose={this.props.onClose}
 				>
