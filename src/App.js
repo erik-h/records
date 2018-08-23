@@ -1,6 +1,7 @@
 import React from 'react';
 
 import BookIcon from '@material-ui/icons/Book';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import './App.css';
 import AddRecordDialog from './AddRecordDialog';
@@ -226,46 +227,49 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-				<NavBar handler={this.handler}>
-				</NavBar>
-				<div id="project-info">
-					<BookIcon className="book-logo" color="primary" />
-					<p><b>TODO</b>, this will contain some info about the project.</p>
+			<React.Fragment>
+				<CssBaseline />
+				<div className="App">
+					<NavBar handler={this.handler}>
+					</NavBar>
+					<div id="project-info">
+						<BookIcon className="book-logo" color="primary" />
+						<p><b>TODO</b>, this will contain some info about the project.</p>
+					</div>
+					<AddRecordDialog
+						open={this.state.showAdd}
+						onClose={this.handleCloseAddDialog.bind(this, false)}
+						onChange={this.handleChange.bind(this)}
+						handleCancel={this.handleCloseAddDialog.bind(this, false)}
+						handleAdd={this.handleCloseAddDialog.bind(this, true)}
+					/>
+					<DeleteRecordDialog
+						open={this.state.showDelete}
+						onChange={this.handleChange.bind(this)}
+						onDelete={this.handleDelete.bind(this)}
+						handleClose={this.handleCloseDeleteDialog.bind(this)}
+						handleSearch={this.handleSearchRecords.bind(this)}
+						records={this.state.displayedRecords}
+						foundRecords={this.state.foundRecords}
+					/>
+					<SearchRecordDialog
+						open={this.state.showSearch}
+						onChange={this.handleChange.bind(this)}
+						handleClose={this.handleCloseSearchDialog.bind(this)}
+						handleSearch={this.handleSearchRecords.bind(this)}
+						records={this.state.displayedRecords}
+						foundRecords={this.state.foundRecords}
+					/>
+					<ErrorSnackbar
+						open={this.state.showErrorSnackbar}
+						onClick={this.onCloseErrorSnackbar.bind(this)}
+						onClose={this.onCloseErrorSnackbar.bind(this)}
+						autoHideDuration={3000}
+					>
+						Invalid input provided!
+					</ErrorSnackbar>
 				</div>
-				<AddRecordDialog
-					open={this.state.showAdd}
-					onClose={this.handleCloseAddDialog.bind(this, false)}
-					onChange={this.handleChange.bind(this)}
-					handleCancel={this.handleCloseAddDialog.bind(this, false)}
-					handleAdd={this.handleCloseAddDialog.bind(this, true)}
-				/>
-				<DeleteRecordDialog
-					open={this.state.showDelete}
-					onChange={this.handleChange.bind(this)}
-					onDelete={this.handleDelete.bind(this)}
-					handleClose={this.handleCloseDeleteDialog.bind(this)}
-					handleSearch={this.handleSearchRecords.bind(this)}
-					records={this.state.displayedRecords}
-					foundRecords={this.state.foundRecords}
-				/>
-				<SearchRecordDialog
-					open={this.state.showSearch}
-					onChange={this.handleChange.bind(this)}
-					handleClose={this.handleCloseSearchDialog.bind(this)}
-					handleSearch={this.handleSearchRecords.bind(this)}
-					records={this.state.displayedRecords}
-					foundRecords={this.state.foundRecords}
-				/>
-				<ErrorSnackbar
-					open={this.state.showErrorSnackbar}
-					onClick={this.onCloseErrorSnackbar.bind(this)}
-					onClose={this.onCloseErrorSnackbar.bind(this)}
-					autoHideDuration={3000}
-				>
-					Invalid input provided!
-				</ErrorSnackbar>
-      </div>
+			</React.Fragment>
     );
   }
 }
