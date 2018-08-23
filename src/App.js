@@ -81,21 +81,26 @@ class App extends React.Component {
 
 	deleteRecord(deleteRecord) {
 		// Find the index in our mock DB that matches the given ID to delete
-		let recordIndex = mockDB.findIndex((element, index, array) => {
+		let recordIndex = mockDB.findIndex((element) => {
 			// return element.id === deleteId;
 			// Search through each of the properties that must match
-			for (let prop in deleteRecord) {
-				if (!element.hasOwnProperty(prop) || element[prop] !== deleteRecord[prop]) {
-					return false
-				}
-			}
-			return true;
+			return this.allPropsMatch(element, deleteRecord);
 		});
+		// TODO: deal with case where recordIndex is -1 because we don't find the record
 		// Delete the record from the mock DB
 		let deletedRecord = mockDB.splice(recordIndex, 1);
 		console.log(`Deleted record: ${JSON.stringify(deletedRecord)}`);
 	}
 
+	allPropsMatch(testSubject, master) {
+		// Search through each of the properties that must match
+		for (let prop in master) {
+				if (!testSubject.hasOwnProperty(prop) || testSubject[prop] !== master[prop]) {
+					return false
+				}
+		}
+		return true;
+	}
 	handleCloseAddDialog(shouldAdd) {
 		console.log(`shouldAdd is: ${shouldAdd}`);
 		const newName = this.state.name;
@@ -107,7 +112,7 @@ class App extends React.Component {
 				name: newName,
 				phoneNumber: newPhoneNumber,
 			});
-			// DEBUG: testing if deleting a record works
+			// DEBUG: testing deleting a record
 			// this.deleteRecord({
 			// 	id: 1000000000,
 			// });
