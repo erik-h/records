@@ -9,6 +9,7 @@ import DeleteRecordDialog from './DeleteRecordDialog';
 import ErrorSnackbar from './ErrorSnackbar';
 import SearchRecordDialog from './SearchRecordDialog';
 import NavBar from './NavBar';
+import RecordStats from './RecordStats';
 
 let mockDB = window.mockDB = [
 	{
@@ -35,6 +36,10 @@ class App extends React.Component {
 
 			foundRecords: true,
 			displayedRecords: [],
+
+			deletedDates: [],
+			averageRecordsAdded: 0,
+			averageRecordsDeleted: 0,
 		};
 	}
 
@@ -80,9 +85,79 @@ class App extends React.Component {
 		// TODO: do a POST request to the real API to add our new record
 		mockDB.push({
 			id: this.findNextID(),
+			created: new Date(),
 			...newRecord
 		});
 		console.log(`mockDB is now: ${JSON.stringify(mockDB)}`);
+	}
+
+	sameDay(a, b) {
+		return a.getFullYear() === b.getFullYear() &&
+			a.getMonth() === b.getMonth() &&
+			a.getDate() === b.getDate();
+	}
+
+	sameHour(a, b) {
+		return a.getHours() === b.getHours();
+	}
+
+	calculateAveragePerHour(dates) {
+		const sortedDates = [...dates].sort((dateA, dateB) => {
+			return dateA - dateB;
+		});
+
+		if (sortedDates.length === 0) {
+			return 0;
+		}
+		let totalHours = 1;
+		let currentDate = sortedDates[0];
+		for (const date of sortedDates) {
+			if (!this.sameDay(date, currentDate) || !this.sameHour(date, currentDate)) {
+				// If the two sequential dates we're looking at are on different
+				// days and/or at different times, we've got a new hour to count
+				totalHours++;
+			}
+			currentDate = date;
+		}
+
+		return sortedDates.length / totalHours;
+	}
+
+	calculateAverageDeleted() {
+		// return this.calculateAveragePerHour(this.state.deletedDates);
+		this.setState({
+			averageRecordsAdded: this.calculateAveragePerHour(this.state.deletedDates),
+		});
+	}
+
+	calculateAverageAdded() {
+		let addedDates = mockDB.map((record) => {
+			return record.created;
+		});
+		// return this.calculateAveragePerHour(addedDates);
+		this.setState({
+			averageRecordsDeleted: this.calculateAveragePerHour(addedDates),
+		});
+		/*
+		const sortedByDate = [...mockDB].sort((recordA, recordB) => {
+			return recordA.created - recordB.created;
+		});
+
+		let totalHours = sortedByDate.length > 0 ? 1 : 0;
+		let currentRecord = sortedByDate[0];
+		for (const record of sortedByDate) {
+			if (!this.sameDay(record.created, currentRecord.created) ||
+				!this.sameHour(record.created, currentRecord.created)) {
+				// If the two sequential records we're looking at are on different
+				// days and/or at different times, we've got a new hour to count
+				totalHours++;
+			}
+			currentRecord = record;
+		}
+
+		// TODO: watch out for 0/0 here
+		return sortedByDate.length / totalHours;
+		*/
 	}
 
 	deleteRecord(deleteRecord) {
@@ -232,6 +307,10 @@ class App extends React.Component {
 				<div className="App">
 					<NavBar handler={this.handler}>
 					</NavBar>
+					<RecordStats
+						averageRecordsAdded={this.state.averageRecordsAdded}
+						averageRecordsDeleted={this.state.averageRecordsDeleted}
+					/>
 					<div id="project-info">
 						<BookIcon className="book-logo" color="primary" />
 						<p><b>TODO</b>, this will contain some info about the project.</p>
