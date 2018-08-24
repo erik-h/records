@@ -1,8 +1,8 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import AddRecordButton from './AddRecordButton.js';
-import DeleteRecordsButton from './DeleteRecordsButton.js';
-import SearchRecordButton from './SearchRecordButton.js';
+import AddRecordButton from './AddRecordButton';
+import DeleteRecordButton from './DeleteRecordButton';
+import SearchRecordButton from './SearchRecordButton';
 import Toolbar from '@material-ui/core/Toolbar';
 
 /**
@@ -15,7 +15,7 @@ class NavBar extends React.Component {
 			<AppBar position="static">
 				<Toolbar>
 					<AddRecordButton updateAppState={this.props.updateAppState}></AddRecordButton>
-					<DeleteRecordsButton updateAppState={this.props.updateAppState}></DeleteRecordsButton>
+					<DeleteRecordButton updateAppState={this.props.updateAppState}></DeleteRecordButton>
 					<SearchRecordButton updateAppState={this.props.updateAppState}></SearchRecordButton>
 				</Toolbar>
 			</AppBar>

@@ -1,27 +1,25 @@
 import React from 'react';
-
-import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import NavButton from './NavButton';
 
 /**
- * A button which allows the user to delete an individual record.
+ * A button which allows the user to search for and delete an existing record.
  */
 class DeleteRecordButton extends React.Component {
 	/**
-	 * Wrapper for handling deletion of the selected record
-	 * @param {Event} e is unused
+	 * Wrapper for updating the core App state when this button is pressed
 	 */
-	handleClick(e) {
-		console.log(`Record id is: ${this.props.recordid}`);
-		this.props.onClick(this.props.recordid);
+	handleClick() {
+		this.props.updateAppState({
+			showDelete: true,
+		});
 	}
 
 	render() {
 		return (
-			<Button onClick={this.handleClick.bind(this)} variant="contained" color="secondary">
-				Delete
-				<DeleteIcon style={{fontSize: "1.5em"}}/>
-			</Button>
+			<NavButton onClick={this.handleClick.bind(this)}>
+				<DeleteIcon />
+			</NavButton>
 		);
 	}
 }
