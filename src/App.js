@@ -38,6 +38,7 @@ class App extends React.Component {
 			foundRecords: true,
 			displayedRecords: [],
 
+			addedDates: mockDB.map(record => record.created).sort((dateA, dateB) => dateA - dateB),
 			deletedDates: [],
 			averageRecordsAdded: 0,
 			averageRecordsDeleted: 0,
@@ -84,12 +85,16 @@ class App extends React.Component {
 
 	addRecord(newRecord) {
 		// TODO: do a POST request to the real API to add our new record
-		mockDB.push({
+		newRecord = {
 			id: this.findNextID(),
 			created: new Date(),
 			...newRecord
-		});
+		};
+		mockDB.push(newRecord);
 		console.log(`mockDB is now: ${JSON.stringify(mockDB)}`);
+		this.setState({
+			addedDates: [...this.state.addedDates, newRecord.created],
+		});
 	}
 
 	sameDay(a, b) {
@@ -128,48 +133,30 @@ class App extends React.Component {
 	}
 
 	calculateAverageDeleted() {
-		// return this.calculateAveragePerHour(this.state.deletedDates);
+		let sortedDeletedDates = this.state.deletedDates.sort((dateA, dateB) => {
+			return dateA - dateB;
+		});
 		this.setState({
-			averageRecordsDeleted: this.calculateAveragePerHour(this.state.deletedDates),
+			averageRecordsDeleted: this.calculateAveragePerHour(sortedDeletedDates),
 		});
 	}
 
 	calculateAverageAdded() {
 		console.log(`mockDB is: ${JSON.stringify(mockDB)}`);
-		let addedDates = mockDB.map((record) => {
-			return record.created;
+		let sortedAddedDates = this.state.addedDates.sort((dateA, dateB) => {
+			return dateA - dateB;
 		});
-		console.log(`ADDED DATES IS: ${addedDates}`);
-		// return this.calculateAveragePerHour(addedDates);
+
+		console.log(`ADDED DATES IS: ${sortedAddedDates}`);
+
 		this.setState({
-			averageRecordsAdded: this.calculateAveragePerHour(addedDates),
+			averageRecordsAdded: this.calculateAveragePerHour(sortedAddedDates),
 		});
-		/*
-		const sortedByDate = [...mockDB].sort((recordA, recordB) => {
-			return recordA.created - recordB.created;
-		});
-
-		let totalHours = sortedByDate.length > 0 ? 1 : 0;
-		let currentRecord = sortedByDate[0];
-		for (const record of sortedByDate) {
-			if (!this.sameDay(record.created, currentRecord.created) ||
-				!this.sameHour(record.created, currentRecord.created)) {
-				// If the two sequential records we're looking at are on different
-				// days and/or at different times, we've got a new hour to count
-				totalHours++;
-			}
-			currentRecord = record;
-		}
-
-		// TODO: watch out for 0/0 here
-		return sortedByDate.length / totalHours;
-		*/
 	}
 
 	deleteRecord(record) {
 		// Find the index in our mock DB that matches the given ID to delete
 		let recordIndex = mockDB.findIndex((element) => {
-			// return element.id === deleteId;
 			// Search through each of the properties that must match
 			return this.allPropsMatch(element, record);
 		});
