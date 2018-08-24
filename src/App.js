@@ -114,6 +114,7 @@ class App extends React.Component {
 	 * @param {Object} newRecord
 	 */
 	addRecord(newRecord) {
+		// eslint-disable-next-line
 		let addedRecord = this.API.addRecord(newRecord);
 
 		// console.log(`Added a record: ${JSON.stringify(addedRecord)}`);
@@ -124,6 +125,7 @@ class App extends React.Component {
 	 * @param {Object} record
 	 */
 	deleteRecord(record) {
+		// eslint-disable-next-line
 		let deletedRecord = this.API.deleteRecord(record);
 
 		// console.log(`Deleted a record: ${JSON.stringify(deletedRecord)}`);
