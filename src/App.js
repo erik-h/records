@@ -45,7 +45,7 @@ class App extends React.Component {
 		};
 	}
 
-	handler(newState) {
+	updateAppState(newState) {
 		this.setState(newState);
 	}
 
@@ -306,7 +306,7 @@ class App extends React.Component {
 			<React.Fragment>
 				<CssBaseline />
 				<div className="App">
-					<NavBar handler={this.handler}>
+					<NavBar updateAppState={this.updateAppState.bind(this)}>
 					</NavBar>
 					<RecordStats
 						averageRecordsAdded={this.state.averageRecordsAdded}

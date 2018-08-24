@@ -10,9 +10,9 @@ class NavBar extends React.Component {
 		return (
 			<AppBar position="static">
 				<Toolbar>
-					<AddRecordButton handler={this.props.handler}></AddRecordButton>
-					<DeleteRecordsButton handler={this.props.handler}></DeleteRecordsButton>
-					<SearchRecordButton handler={this.props.handler}></SearchRecordButton>
+					<AddRecordButton updateAppState={this.props.updateAppState}></AddRecordButton>
+					<DeleteRecordsButton updateAppState={this.props.updateAppState}></DeleteRecordsButton>
+					<SearchRecordButton updateAppState={this.props.updateAppState}></SearchRecordButton>
 				</Toolbar>
 			</AppBar>
 		);

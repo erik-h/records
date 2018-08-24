@@ -5,8 +5,9 @@ import NavButton from './NavButton';
 
 class AddRecordButton extends React.Component {
 	handleClick() {
-		// alert('Adding!');
-		this.props.handler({showAdd: true});
+		this.props.updateAppState({
+			showAdd: true,
+		});
 	}
 
 	render() {
