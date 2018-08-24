@@ -53,7 +53,7 @@ class API {
 	 * those of the given "master" object.
 	 * @param {Object} testSubject
 	 * @param {Object} master
-	 * @return {boolean} true if at least some properties fuzz-ily match
+	 * @return {boolean} true if at least some properties fuzzy match
 	 */
 	fuzzyPropsMatch(testSubject, master) {
 		for (let prop in master) {
@@ -130,7 +130,8 @@ class API {
 	 * @return {(Object|Array)} the matching database records
 	 */
 	findFuzzyRecords(searchProps) {
-		// TODO: perform a GET request to the real back end, querying for the desired record fuzz-ily
+		// TODO: perform a GET request to the real back end, querying for fuzzy
+		// matches of the desired record
 		return this.mockDB.filter((element) => {
 			return this.fuzzyPropsMatch(element, searchProps);
 		});

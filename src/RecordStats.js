@@ -14,18 +14,31 @@ const styles = theme => ({
 	},
 });
 
+/**
+ * A Card containing the historical average records added per hour, as well as
+ * the average records added vs deleted per hour.
+ */
 class RecordStats extends React.Component {
-	// Calculate the greatest common denominator between two numbers
+	/**
+	 * Calculate the greatest common denominator between two numbers
+	 * @param {number} a
+	 * @param {number} b
+	 * @return {number} the greatest common denominator between a and b, or undefined if either is null
+	 */
 	gcd(a, b) {
 		if (a == null || b == null) {
 			// Either number being null or undefined means we can't calculate the GCD!
 			return undefined;
 		}
 
-		console.log(`a is ${a}, b is ${b}`);
 		return (b === 0) ? a : this.gcd(b, a%b);
 	}
 
+	/**
+	 * Update the statistics using an interval, calling the back end every second.
+	 * TODO: this could be swapped out to use long polling when a real back end
+	 * is used instead of our mock.
+	 */
 	componentDidMount() {
 		this.props.updateAverages();
 		this.interval = setInterval(() => {
@@ -33,19 +46,22 @@ class RecordStats extends React.Component {
 		}, 1000);
 	}
 
+	/**
+	 * Clear the automatic updating of statistics
+	 */
 	componentWillUnmount() {
 		clearInterval(this.interval);
 	}
 
 	render() {
-		console.log('RERENDERING RECORDSTATS!!!!!!!!!');
 		const { averageRecordsAdded, averageRecordsDeleted, classes } = this.props;
-		// TODO: deal with division by zero
+
 		const ratioDivisor = this.gcd(averageRecordsAdded, averageRecordsDeleted);
 		const reducedAdded = isNaN(averageRecordsAdded/ratioDivisor) ? 0 :
 			averageRecordsAdded/ratioDivisor;
 		const reducedDeleted = isNaN(averageRecordsDeleted/ratioDivisor) ? 0 :
 			averageRecordsDeleted/ratioDivisor;
+
 		return (
 			<Card className={classes.card}>
 				<CardContent >

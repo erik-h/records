@@ -3,6 +3,9 @@ import AddIcon from '@material-ui/icons/Add';
 
 import NavButton from './NavButton';
 
+/**
+ * A button which allows the user to input a new record.
+ */
 class AddRecordButton extends React.Component {
 	handleClick() {
 		this.props.updateAppState({

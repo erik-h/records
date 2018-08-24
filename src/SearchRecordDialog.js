@@ -10,6 +10,10 @@ import Typography from '@material-ui/core/Typography';
 
 import RecordsTable from './RecordsTable';
 
+/**
+ * A Dialog for prompting the user for data to search for and display matching
+ * records from the back end
+ */
 class SearchRecordDialog extends React.Component {
 	render() {
 		return (

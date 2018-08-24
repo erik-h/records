@@ -6,6 +6,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+/**
+ * A table containing search results for records.
+ * A modifier can be given as a prop, allowing for additional children
+ * to be prepended to record rows.
+ */
 class RecordsTable extends React.Component {
 	render() {
 		return (

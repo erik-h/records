@@ -7,6 +7,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 
+/**
+ * A Dialog for prompting the user for a new record.
+ */
 class AddRecordDialog extends React.Component {
 	render() {
 		return (

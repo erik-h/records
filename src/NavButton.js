@@ -1,6 +1,9 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
+/**
+ * A button to be used within a navigation bar.
+ */
 class NavButton extends React.Component {
 	render() {
 		return (

@@ -13,6 +13,9 @@ const styles = {
 	}
 };
 
+/**
+ * A Snackbar displayed when user errors occur regarding input.
+ */
 class ErrorSnackbar extends React.Component {
 	render() {
 		const { classes } = this.props;
