@@ -27,7 +27,7 @@ class RecordStats extends React.Component {
 	}
 
 	componentDidMount() {
-		// this.props.updateAverages();
+		this.props.updateAverages();
 		this.interval = setInterval(() => {
 			this.props.updateAverages();
 		}, 1000);
