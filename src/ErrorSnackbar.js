@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import IconButton from '@material-ui/core/IconButton';
 import ErrorIcon from '@material-ui/icons/Error';
@@ -17,6 +18,15 @@ const styles = {
  * A Snackbar displayed when user errors occur regarding input.
  */
 class ErrorSnackbar extends React.Component {
+	static propTypes = {
+		classes: PropTypes.object.isRequired,
+		open: PropTypes.bool.isRequired,
+		onClose: PropTypes.func.isRequired,
+		onClick: PropTypes.func.isRequired,
+		autoHideDuration: PropTypes.number.isRequired,
+		children: PropTypes.node.isRequired,
+	}
+
 	render() {
 		const { classes } = this.props;
 		return (

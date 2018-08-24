@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -11,6 +12,14 @@ import TextField from '@material-ui/core/TextField';
  * A Dialog for prompting the user for a new record.
  */
 class AddRecordDialog extends React.Component {
+	static propTypes = {
+		open: PropTypes.bool.isRequired,
+		onClose: PropTypes.func.isRequired,
+		onChange: PropTypes.func.isRequired,
+		handleCancel: PropTypes.func.isRequired,
+		handleAdd: PropTypes.func.isRequired,
+	};
+
 	render() {
 		return (
 				<Dialog

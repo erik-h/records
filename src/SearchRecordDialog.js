@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -15,12 +16,22 @@ import RecordsTable from './RecordsTable';
  * records from the back end
  */
 class SearchRecordDialog extends React.Component {
+	static propTypes = {
+		open: PropTypes.bool.isRequired,
+		onChange: PropTypes.func.isRequired,
+		records: PropTypes.array.isRequired,
+		recordModifier: PropTypes.element,
+		foundRecords: PropTypes.bool.isRequired,
+		handleSearch: PropTypes.func.isRequired,
+		handleClose: PropTypes.func.isRequired,
+	};
+
 	render() {
 		return (
 				<Dialog
 					scroll="body"
 					open={this.props.open}
-					onClose={this.props.onClose}
+					onClose={this.props.handleClose}
 				>
 					<DialogTitle>Test Dialog</DialogTitle>
 					<form onSubmit={(e) => e.preventDefault()}>

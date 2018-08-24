@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,6 +13,11 @@ import TableRow from '@material-ui/core/TableRow';
  * to be prepended to record rows.
  */
 class RecordsTable extends React.Component {
+	static propTypes = {
+		records: PropTypes.array.isRequired,
+		recordModifier: PropTypes.element,
+	};
+
 	render() {
 		return (
 			<Table>

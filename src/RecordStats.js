@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -19,6 +20,13 @@ const styles = theme => ({
  * the average records added vs deleted per hour.
  */
 class RecordStats extends React.Component {
+	static propTypes = {
+		averageRecordsAdded: PropTypes.number.isRequired,
+		averageRecordsDeleted: PropTypes.number.isRequired,
+		classes: PropTypes.object.isRequired,
+		updateAverages: PropTypes.func.isRequired,
+	};
+
 	/**
 	 * Calculate the greatest common denominator between two numbers
 	 * @param {number} a
