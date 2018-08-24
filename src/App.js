@@ -14,6 +14,7 @@ import RecordStats from './RecordStats';
 let mockDB = window.mockDB = [
 	{
 		id: 1000000000,
+		created: new Date(),
 		name: "John Doe",
 		phoneNumber: "7805551234",
 	}
@@ -102,9 +103,11 @@ class App extends React.Component {
 	}
 
 	calculateAveragePerHour(dates) {
+		console.log(`dates is: ${dates}`);
 		const sortedDates = [...dates].sort((dateA, dateB) => {
 			return dateA - dateB;
 		});
+		console.log(`sortedDates is: '${sortedDates}'`);
 
 		if (sortedDates.length === 0) {
 			return 0;
@@ -112,6 +115,7 @@ class App extends React.Component {
 		let totalHours = 1;
 		let currentDate = sortedDates[0];
 		for (const date of sortedDates) {
+			// console.log(`date is ${date}, currentDate is ${currentDate}`);
 			if (!this.sameDay(date, currentDate) || !this.sameHour(date, currentDate)) {
 				// If the two sequential dates we're looking at are on different
 				// days and/or at different times, we've got a new hour to count
@@ -126,17 +130,19 @@ class App extends React.Component {
 	calculateAverageDeleted() {
 		// return this.calculateAveragePerHour(this.state.deletedDates);
 		this.setState({
-			averageRecordsAdded: this.calculateAveragePerHour(this.state.deletedDates),
+			averageRecordsDeleted: this.calculateAveragePerHour(this.state.deletedDates),
 		});
 	}
 
 	calculateAverageAdded() {
+		console.log(`mockDB is: ${JSON.stringify(mockDB)}`);
 		let addedDates = mockDB.map((record) => {
 			return record.created;
 		});
+		console.log(`ADDED DATES IS: ${addedDates}`);
 		// return this.calculateAveragePerHour(addedDates);
 		this.setState({
-			averageRecordsDeleted: this.calculateAveragePerHour(addedDates),
+			averageRecordsAdded: this.calculateAveragePerHour(addedDates),
 		});
 		/*
 		const sortedByDate = [...mockDB].sort((recordA, recordB) => {
@@ -160,17 +166,20 @@ class App extends React.Component {
 		*/
 	}
 
-	deleteRecord(deleteRecord) {
+	deleteRecord(record) {
 		// Find the index in our mock DB that matches the given ID to delete
 		let recordIndex = mockDB.findIndex((element) => {
 			// return element.id === deleteId;
 			// Search through each of the properties that must match
-			return this.allPropsMatch(element, deleteRecord);
+			return this.allPropsMatch(element, record);
 		});
 		// TODO: deal with case where recordIndex is -1 because we don't find the record
 		// Delete the record from the mock DB
-		let deletedRecord = mockDB.splice(recordIndex, 1);
+		let deletedRecord = mockDB.splice(recordIndex, 1)[0];
 		console.log(`Deleted record: ${JSON.stringify(deletedRecord)}`);
+		this.setState({
+			deletedDates: [...this.state.deletedDates, deletedRecord.created],
+		});
 	}
 
 	allPropsMatch(testSubject, master) {
@@ -300,6 +309,11 @@ class App extends React.Component {
 		this.handleSearchRecords();
 	}
 
+	updateAverages() {
+		this.calculateAverageAdded();
+		this.calculateAverageDeleted();
+	}
+
   render() {
     return (
 			<React.Fragment>
@@ -310,6 +324,7 @@ class App extends React.Component {
 					<RecordStats
 						averageRecordsAdded={this.state.averageRecordsAdded}
 						averageRecordsDeleted={this.state.averageRecordsDeleted}
+						updateAverages={this.updateAverages.bind(this)}
 					/>
 					<div id="project-info">
 						<BookIcon className="book-logo" color="primary" />
