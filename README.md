@@ -18,8 +18,10 @@ into the `build/` directory.
 
 ### Testing
 
-Unit tests primarily for the main `<App />` React component are located in
-`__tests__/`. To execute the test suite, run `npm test`.
+[Jest](https://jestjs.io) and [Enzyme](https://airbnb.io/projects/enzyme/) are
+used for testing the application. Unit tests primarily for the main `<App />`
+React component are located in `__tests__/`. To execute the test suite, run
+`npm test`.
 
 ### Additional Documents
 
