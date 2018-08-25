@@ -26,4 +26,4 @@ React component are located in `__tests__/`. To execute the test suite, run
 ### Additional Documents
 
 Documents containing questions regarding the design of the project, along with
-a specification of a real back end REST API are located at `documents/`.
+a specification for a real back end REST API are located at `documents/`.
