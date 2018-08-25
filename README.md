@@ -3,7 +3,7 @@
 This project contains a React front end app for creating, deleting, and
 displaying records. Records are composed of a unique 10 digit ID, a name
 string, and a phone number string. The back end API is abstracted into its own
-class; currently, a mock back end is used that stores records in-browser
+class; currently, a mock back end is used that stores records in browser
 memory.
 
 ### Building
