@@ -5,13 +5,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 
 import './App.css';
-import API from './API';
-import AddRecordDialog from './AddRecordDialog';
-import DeleteRecordDialog from './DeleteRecordDialog';
-import ErrorSnackbar from './ErrorSnackbar';
-import SearchRecordDialog from './SearchRecordDialog';
-import NavBar from './NavBar';
-import RecordStats from './RecordStats';
+import API from '../api/API';
+import AddRecordDialog from '../dialog/AddRecordDialog';
+import DeleteRecordDialog from '../dialog/DeleteRecordDialog';
+import ErrorSnackbar from '../error/ErrorSnackbar';
+import SearchRecordDialog from '../dialog/SearchRecordDialog';
+import NavBar from '../nav/NavBar';
+import RecordStats from '../stats/RecordStats';
 
 /**
  * A record keeping application; users can add, delete, and search for records.

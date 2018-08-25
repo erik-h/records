@@ -48,10 +48,10 @@ class AddRecordDialog extends React.Component {
 								/>
 						</DialogContent>
 						<DialogActions>
-							<Button type="button" onClick={this.props.handleCancel}>
+							<Button type="button" name="cancelButton" onClick={this.props.handleCancel}>
 								Cancel
 							</Button>
-							<Button type="submit" onClick={this.props.handleAdd}>
+							<Button type="submit" name="addButton" onClick={this.props.handleAdd}>
 								Add
 							</Button>
 						</DialogActions>
