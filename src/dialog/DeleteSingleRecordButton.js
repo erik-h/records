@@ -10,6 +10,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 class DeleteSingleRecordButton extends React.Component {
 	static propTypes = {
 		recordid: PropTypes.number,
+		name: PropTypes.string,
+		phoneNumber: PropTypes.string,
 		onClick: PropTypes.func.isRequired,
 	};
 

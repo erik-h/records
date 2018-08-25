@@ -39,6 +39,8 @@ class RecordsTable extends React.Component {
 												this.props.recordModifier,
 												{
 													recordid: record.id,
+													recordname: record.name,
+													recordphonenumber: record.phoneNumber,
 												}
 											)
 										}
