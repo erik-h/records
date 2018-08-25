@@ -27,11 +27,11 @@ class AddRecordDialog extends React.Component {
 					open={this.props.open}
 					onClose={this.props.onClose}
 				>
-					<DialogTitle>Test Dialog</DialogTitle>
+					<DialogTitle>Add a record</DialogTitle>
 					<form onSubmit={(e) => e.preventDefault()}>
 						<DialogContent>
 							<DialogContentText>
-								Test dialog content is right here!
+								Please fill out the necessary fields below.
 							</DialogContentText>
 								<TextField
 									onChange={this.props.onChange}
