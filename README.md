@@ -13,8 +13,8 @@ production, use `npm install --production` to skip optional dev dependencies.
 To work on a development version of the project, run `npm start` to invoke the
 default file compiling and watching functionality from `react-scripts` provided
 to this project by `create-react-app`. For a production build, execute `npm run
-build`; this will place a minified version of the project into the `build/`
-directory.
+build`; this will place a minified, deployment ready version of the project
+into the `build/` directory.
 
 ### Testing
 
