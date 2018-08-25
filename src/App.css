@@ -16,10 +16,9 @@ body, html, #root {
 }
 
 #project-info {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-	overflow: hidden;
+	padding-top: 10%;
+}
+
+.project-info-body {
+	padding: 2%;
 }

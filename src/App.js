@@ -2,6 +2,7 @@ import React from 'react';
 
 import BookIcon from '@material-ui/icons/Book';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
 
 import './App.css';
 import API from './API';
@@ -292,7 +293,14 @@ class App extends React.Component {
 					/>
 					<div id="project-info">
 						<BookIcon className="book-logo" color="primary" />
-						<p><b>TODO</b>, this will contain some info about the project.</p>
+						<Typography variant="display3">Records</Typography>
+						<Typography className="project-info-body" variant="body1">
+							Welcome to the records app!
+						</Typography>
+						<Typography className="project-info-body" variant="body1">
+							Use the three buttons located in the
+							navigation bar to add, delete, and search for and display records.
+						</Typography>
 					</div>
 					<AddRecordDialog
 						open={this.state.showAdd}
