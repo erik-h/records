@@ -17,6 +17,7 @@ import RecordsTable from './RecordsTable';
  */
 class SearchRecordDialog extends React.Component {
 	static propTypes = {
+		title: PropTypes.string,
 		open: PropTypes.bool.isRequired,
 		onChange: PropTypes.func.isRequired,
 		records: PropTypes.array.isRequired,
@@ -33,11 +34,11 @@ class SearchRecordDialog extends React.Component {
 					open={this.props.open}
 					onClose={this.props.handleClose}
 				>
-					<DialogTitle>Test Dialog</DialogTitle>
+					<DialogTitle>{this.props.title ? this.props.title : "Search for records"}</DialogTitle>
 					<form onSubmit={(e) => e.preventDefault()}>
 						<DialogContent>
 							<DialogContentText>
-								Search for a record!
+								Please fill out the necessary fields below.
 							</DialogContentText>
 								<TextField
 									onChange={this.props.onChange}

@@ -16,6 +16,7 @@ class DeleteRecordDialog extends React.Component {
 		return (
 			<SearchRecordDialog
 					{...this.props}
+					title="Delete records"
 					recordModifier={<DeleteSingleRecordButton onClick={this.props.onDelete}/>}
 			/>
 		);
