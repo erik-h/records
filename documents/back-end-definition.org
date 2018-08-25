@@ -1,0 +1,34 @@
+#+options: toc:nil
+#+options: num:nil
+#+options: date:nil
+#+options: ^:nil
+#+latex_header: \usepackage[margin=2.54cm, footskip=55pt]{geometry}
+# Improves typography
+#+latex_header: \usepackage{microtype}
+# Palatino with smallcaps
+#+latex_header: \usepackage[sc]{mathpazo}
+# Avant Garde
+#+latex_header: \usepackage{avant}
+# Monospace font insonsolata
+#+latex_header: \usepackage[varqu]{zi4}
+#+latex_header: \hypersetup{hidelinks}
+#+title: Back End API Definition
+#+author: Erik Haugrud
+
+This document provides a specification of the REST API endpoints for the
+records storage system. All input and output with the API will be given in
+JSON format. HTTP status 200 should be returned for successful requests, 400
+for bad requests, and 422 if the given input is invalid/unprocessable.
+
+~POST /records~ - Create a user, with user name and phone number given in the
+HTTP body. If it is successful, the created record should be returned.
+
+~GET /records/:recordID:~ - Get the information for the given record ID.
+
+~GET /records/?sorted=:asc|desc:&startID=:X:&limit=:N:~ - Get all records if
+~N~ is not supplied, otherwise get ~N~ many. If ~X~ is given, then start
+providing the next ~N~ records beginning with the record with ID of ~X~. If
+~sorted~ is supplied, sort the records either in ascending or descending
+order before returning them.
+
+~DELETE /records/:recordID:~ - Delete the record with the given record ID.

@@ -1,0 +1,102 @@
+#+options: toc:nil
+#+options: num:nil
+#+options: date:nil
+#+options: ^:nil
+#+latex_header: \usepackage[margin=2.54cm, footskip=55pt]{geometry}
+# Improves typography
+#+latex_header: \usepackage{microtype}
+# Palatino with smallcaps
+#+latex_header: \usepackage[sc]{mathpazo}
+# Avant Garde
+#+latex_header: \usepackage{avant}
+# Monospace font insonsolata
+#+latex_header: \usepackage[varqu]{zi4}
+#+latex_header: \hypersetup{hidelinks}
+#+title: Questions
+#+author: Erik Haugrud
+
+1. Why did you use the design/framework (if any) you chose?
+   
+   I chose to use the React framework for developing this project. The
+   application specification seemed complex enough that I would be better off
+   using a full blown framework as opposed to a library like jQuery. From
+   what I've heard and seen built with React, it looked like a good fit due
+   to providing a lot of powerful functionality with relatively small amounts
+   of code. I also chose to use the Material-UI React component
+   framework, basing all of my components off of their core. This allowed me
+   to build the project without needing to spend a lot of time deciding on
+   what design to choose, opting for Google's popular material design
+   instead. 
+
+2. Are there better frameworks for this task which you did not choose for
+   some reason (e.g. example you are not familiar with them and did not have
+   time to learn them)?
+
+   Most of my experience with front end development has been through
+   developing from scratch, using libraries like jQuery to add more
+   interesting functionality. Though I had read about both React and
+   Material-UI, this project was my first real experience with either
+   framework. I chose React due to the high praise and proven results I've
+   encountered in other projects using the framework. I believe its primary
+   competitors Angular, Ember.js, and Vue.js would have both also been good
+   choices. From my understanding of these frameworks they all provide a
+   strong framework with which to build apps, with each having a few
+   different core design decisions that set them apart. React's somewhat odd
+   and unfamiliar usage of JSX initially drew me toward it, and I believe it
+   was a well made decision. Though I had used neither React nor Material-UI
+   prior to this challenge, I feel that I was able to provide a fairly
+   functional project while learning a lot about React along the way.
+
+3. When you added testing, why did you select those particular tests?
+
+   My experience with writing tests is mostly in the form of unit tests for
+   back end applications. With this being the case, for this project I
+   decided to focus on writing some unit tests for the core functionality of
+   the application. I added tests for adding, deleting, and searching
+   for/displaying records. Through using Jest and Enzyme, I was able to
+   simulate mouse clicks and other events on the React front end, and ensure
+   that records were successfully added, deleted, and found.
+
+   In particular, for adding records I tested the positive case of the user
+   pressing "Ok", confirming they wish to add a record, along with the case
+   where "Cancel" is pressed. I also chose to test the various cases where
+   the name and/or phone number are invalid. My tests for deleting and searching
+   covered the basic cases, where a record is added, and subsequently
+   searched for and deleted.
+
+   There is definitely a lot of room for improvement in my test suite. I
+   mainly covered the primary App React component, while neglecting to test
+   all of the other components I created individually.
+
+4. How can the API calls be made secure so that not anyone with the API can call them?
+
+   To secure the back end API, one option is to implement some sort of
+   authentication system. In order to access the API endpoints, the client
+   would first need to make a request to the back end to validate that they
+   should be allowed access. Upon doing so, they would be given a unique
+   session token. This token could then be provided in an HTTP header for all
+   subsequent requests, with the back end checking the validity of the
+   session on each API call.
+
+5. Explain how bad input should be handled on the back end if it gets past the front end checks.
+
+   To handle bad input that makes it to the back end, one option is to make
+   the back end API return an error code and message. The front end can then
+   take in this data, whether it be a JSON object with "error" and "message"
+   fields or something else, and display an appropriate message to the front
+   end user.
+
+6. Which JavaScript best practices do you find valuable and adhere to? 
+
+   The JavaScript best practices I find valuable and try to adhere to are:
+   - Always end lines with a semicolon if it's possible/makes sense.
+   - Minimize usage of global variables (!!!).
+   - When defining an object, use a trailing comma after every property
+     (whenever possible); this allows for properties to be added and
+     commented out without getting syntax errors.
+   - As long as a transpiler is being used or the project is targeting
+     ES6, always use =const= and =let= instead of =var=. This eliminates
+     weirdness caused by =var='s very weak binding resulting in variables
+     being defined or undefined strangely in different situations.
+   - Always use ~===~ and ~!==~, except for those fairly rare instances where
+     you /may/ actually want ~==~ and ~!=~.
