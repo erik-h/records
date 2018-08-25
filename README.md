@@ -6,6 +6,8 @@ string, and a phone number string. The back end API is abstracted into its own
 class; currently, a mock back end is used that stores records in browser
 memory.
 
+Note that the records database comes pre-populated with one entry.
+
 ### Building
 
 Start by running `npm install` to pull down the dependencies. If running in
