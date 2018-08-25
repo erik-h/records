@@ -66,10 +66,10 @@ class SearchRecordDialog extends React.Component {
 							}
 						</DialogContent>
 						<DialogActions>
-							<Button type="submit" onClick={this.props.handleSearch}>
+							<Button type="submit" name="searchButton" onClick={this.props.handleSearch}>
 								Search
 							</Button>
-							<Button type="button" onClick={this.props.handleClose}>
+							<Button type="button" name="closeButton" onClick={this.props.handleClose}>
 								Close
 							</Button>
 						</DialogActions>
